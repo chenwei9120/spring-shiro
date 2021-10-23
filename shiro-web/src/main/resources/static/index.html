@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport"-->
+    <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <title>Document</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+                $("#lnkExit").bind("click", function () {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8080/shiro/user/logout",
+                        data: {},
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result == "") {
+                                window.url = "/login.html";
+                            } else {
+                                alert(result);
+                            }
+                        },
+                        error: function (e) {
+                            console.log(e.toLocaleString())
+                            alert("退出失败");
+                        }
+                    });
+                });
+            }
+        );
+    </script>
+</head>
+<body>
+<h1>系统主页</h1>
+<ul>
+    <li><a href="#">用户管理</a></li>
+    <li><a href="#">商品管理</a></li>
+    <li><a href="#">订单管理</a></li>
+    <li><a href="#">物流管理</a></li>
+</ul>
+<a id="lnkExit">退出登录</a>
+</body>
+</html>

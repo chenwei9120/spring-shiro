@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript">
+        $(
+            function () {
+                $("#btnLogin").bind("click", function () {
+                    $.ajax({
+                        type: "post",
+                        url: "/shiro/user/login",
+                        data: JSON.stringify({username: $("#username").val(), password: $("#password").val()}),
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result == "") {
+                                window.url = "/index.html";
+                            } else {
+                                alert(result);
+                            }
+                        },
+                        error: function (e) {
+                            console.log(e.toLocaleString())
+                            alert("登录失败");
+                        }
+                    });
+                });
+            }
+        );
+    </script>
+</head>
+<body>
+<h1>登录界面</h1>
+<form>
+    用户名:<input type="text" name="username" id="username"> <br/>
+    密码 : <input type="text" name="password" id="password"> <br>
+    <input id="btnLogin" type="submit" value="登录">
+</form>
+</body>
+</html>
